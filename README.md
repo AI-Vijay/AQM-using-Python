@@ -101,8 +101,8 @@ Wi-Fi credentials can be configured using either `.env` or `secrets.h`.
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/AI-Vijay/AQM-using-Python.git
+   cd AQM-using-Python
    ```
 
 2. **Create and activate a virtual environment:**
