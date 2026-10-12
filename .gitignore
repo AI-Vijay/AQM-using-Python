@@ -4,9 +4,17 @@ venv/
 .vscode/
 .idea/
 
+# Environment and secrets configuration
+.env
+secrets.h
+
 # Generated sensor data
 data/sensor_data.json
 data/sensor_history.csv
+
+# Python bytecode
+__pycache__/
+*.pyc
 
 # OS files
 .DS_Store
