@@ -267,11 +267,33 @@ def display_dashboard(data, connected):
     # Section 1: Main Environmental Overview
     st.subheader("📊 Core Metrics")
     m1, m2, m3, m4, m5 = st.columns(5)
-    m1.metric("🌡️ Temperature", f"{temp:.1f} °C", delta=f"{derived['heat_index'] - temp:+.1f} °C HeatIdx")
-    m2.metric("💧 Humidity", f"{rh:.1f} %", delta=f"{derived['dew_point']:.1f} °C Dew Pt")
-    m3.metric("📊 Air Quality Index", aqi)
-    m4.metric("⚡ ADC Voltage", f"{derived['voltage']} V")
-    m5.metric("💨 Est. CO₂ / VOC", f"{derived['est_co2_ppm']} ppm")
+    m1.metric(
+        "🌡️ Temperature",
+        f"{temp:.1f} °C",
+        delta=f"{derived['heat_index'] - temp:+.1f} °C HeatIdx",
+        help="Current ambient air temperature. Delta indicates difference from perceived Heat Index."
+    )
+    m2.metric(
+        "💧 Humidity",
+        f"{rh:.1f} %",
+        delta=f"{derived['dew_point']:.1f} °C Dew Pt",
+        help="Relative humidity percentage. Delta shows calculated Dew Point."
+    )
+    m3.metric(
+        "📊 Air Quality Index",
+        aqi,
+        help="0–500 scale indicating air cleanliness (0–50 is Good, >100 is Unhealthy)."
+    )
+    m4.metric(
+        "⚡ ADC Voltage",
+        f"{derived['voltage']} V",
+        help="Direct voltage reading (0.0V–3.3V) from the MQ-135 sensor pin."
+    )
+    m5.metric(
+        "💨 Est. CO₂ / VOC",
+        f"{derived['est_co2_ppm']} ppm",
+        help="Estimated CO₂ / Volatile Organic Compounds concentration in parts per million."
+    )
 
     st.divider()
 
@@ -286,10 +308,26 @@ def display_dashboard(data, connected):
     with col_right:
         st.subheader("🔬 Atmospheric Calculations")
         d1, d2 = st.columns(2)
-        d1.metric("Vapor Pressure Deficit (VPD)", f"{derived['vpd']} kPa")
-        d1.metric("Absolute Humidity", f"{derived['abs_humidity']} g/m³")
-        d2.metric("Gas Sensor Ratio (Rs/R0)", f"{derived['rs_r0']}")
-        d2.metric("Raw MQ-135 Counts", raw_gas)
+        d1.metric(
+            "Vapor Pressure Deficit (VPD)",
+            f"{derived['vpd']} kPa",
+            help="Measures air drying capacity. Ideal range for plant/room comfort is 0.8–1.2 kPa."
+        )
+        d1.metric(
+            "Absolute Humidity",
+            f"{derived['abs_humidity']} g/m³",
+            help="Actual water vapor mass per cubic meter of air."
+        )
+        d2.metric(
+            "Gas Sensor Ratio (Rs/R0)",
+            f"{derived['rs_r0']}",
+            help="Ratio of sensor resistance in present gas vs. clean air."
+        )
+        d2.metric(
+            "Raw MQ-135 Counts",
+            raw_gas,
+            help="Raw 12-bit ADC integer value (0 to 4095) from ESP32."
+        )
 
     # Section 3: Historical Trend Visualizations
     st.divider()
@@ -369,6 +407,12 @@ def realtime_dashboard():
     if data is not None:
         display_dashboard(data=data, connected=connected)
     else:
-        st.error("🔴 ESP32 is not connected and no cached data is available.")
+        st.error("🔴 **ESP32 Disconnected & No Cached Data Available**")
+        st.info("""
+        **Troubleshooting Steps:**
+        1. Ensure your ESP32 is powered on and connected to Wi-Fi.
+        2. Verify that `ESP32_IP` in `dashboard.py` matches the device IP on your network.
+        3. Check that the ESP32 endpoint (`/api/data`) is responding.
+        """)
 
 realtime_dashboard()
