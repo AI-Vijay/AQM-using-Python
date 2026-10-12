@@ -123,17 +123,7 @@ Wi-Fi credentials can be configured using either `.env` or `secrets.h`.
    ```bash
    streamlit run dashboard.py
    ```
-
----
-
-#### Docker Deployment (Recommended)
-
-1. **Build and start container:**
-   ```bash
-   docker-compose up -d --build
-   ```
-
-2. Access the dashboard at `http://localhost:8501`.
+6. Access the dashboard at `http://localhost:8501`.
 
 ---
 
@@ -172,8 +162,6 @@ Returns basic service status text and endpoint guide.
 ├── .env.example               # Environment variables template
 ├── secrets.h.example          # Wi-Fi credentials header template
 ├── r.txt                      # Python library dependencies
-├── Dockerfile                 # Docker image configuration
-├── docker-compose.yml         # Multi-container orchestration and volume mounts
 ├── .gitignore                 # Excluded tracking for secrets and build artifacts
 └── README.md                  # Project documentation
 ```
