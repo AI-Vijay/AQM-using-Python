@@ -1,0 +1,12 @@
+venv/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Generated sensor data
+data/sensor_data.json
+data/sensor_history.csv
+
+# OS files
+.DS_Store

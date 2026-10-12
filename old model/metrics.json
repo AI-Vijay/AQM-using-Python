@@ -1,0 +1,27 @@
+{
+  "city": "Mumbai",
+  "rows_used": 18171,
+  "train_rows": 14536,
+  "test_rows": 3635,
+  "MAE": 15.548379850355596,
+  "RMSE": 20.815385560498477,
+  "R2": 0.7755284703218441,
+  "features": [
+    "PM2.5",
+    "PM10",
+    "NO",
+    "NO2",
+    "NOx",
+    "NH3",
+    "CO",
+    "SO2",
+    "O3",
+    "Benzene",
+    "Toluene",
+    "Xylene",
+    "hour",
+    "day_of_week",
+    "month",
+    "day_of_year"
+  ]
+}
