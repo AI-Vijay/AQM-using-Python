@@ -6,8 +6,21 @@
 // 1. WI-FI CREDENTIALS
 // ==================================================
 
-const char* ssid = "Darkstar";
-const char* password = "YOUR_HOTSPOT_PASSWORD";
+// Include secrets.h if present (copy secrets.h.example or generated from .env)
+#if __has_include("secrets.h")
+#include "secrets.h"
+#endif
+
+#ifndef WIFI_SSID
+#define WIFI_SSID "YOUR_WIFI_SSID"
+#endif
+
+#ifndef WIFI_PASSWORD
+#define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+#endif
+
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASSWORD;
 
 // ==================================================
 // 2. SENSOR CONFIGURATION
